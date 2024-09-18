@@ -1,6 +1,32 @@
 let userMove=""; 
 let computerMove=""; 
 let result =""; 
+let cScore=0;
+let uScore=0; 
+const selectDiv=document.querySelector(".moveSelect"); 
+const scoreP=document.querySelector(".score-p"); 
+
+
+
+
+
+
+function playGame(n){
+    for(let i=0; i<n;i++){
+        playRound(); 
+    }
+    let winner=""; 
+    if(uScore>cScore){
+        winner="You "; 
+    }else winner="computer"; 
+    scoreP.textContent=`${winner} WON`; 
+}
+
+
+
+
+
+
 function getComputerMove(){
     const rn=Math.floor(Math.random()*11); // return random from 0 to 10; 
 
@@ -14,7 +40,7 @@ function getComputerMove(){
     return computerMove; 
 }
 
-const selectDiv=document.querySelector(".moveSelect"); 
+
 
 
 selectDiv.addEventListener("click",(event)=>{
@@ -72,10 +98,38 @@ selectDiv.addEventListener("click",(event)=>{
                 break; 
         
         }
+
         
-        console.log(result); 
+        console.log(result)
+
+
+
+        
+        if(result=="win"){
+            uScore++; 
+        }else if(result=="loss") cScore++; 
+
+        scoreP.textContent=`User Score:${uScore} ---------- Computer Score:${cScore}`; 
+
+        if(uScore==5 || cScore==5){
+            let winner=""; 
+            if(uScore>cScore){
+                winner="You "; 
+            }else winner="computer"; 
+            scoreP.textContent=`${winner} WON`; 
+            uScore=0; 
+            cScore=0; 
+        }
+
+
+        
+    
+    
+    
     }
 }); 
+
+
 
 
 
